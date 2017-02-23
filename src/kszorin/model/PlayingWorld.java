@@ -8,14 +8,17 @@ public class PlayingWorld {
     private byte fieldSizeY;
     private final int orcasQuantity;
     private final int penguinsQuantity;
+    private byte environs;
     private int waterSpace[][];
     private Map<Integer, SeaCreature> seaCreaturesMap;
-//TODO: сделать порверку вводимых значений
-    public PlayingWorld(byte fieldSizeX, byte fieldSizeY, byte orcasPercentFilling, byte penguinsPercentFilling) {
+
+    //TODO: сделать порверку вводимых значений
+    public PlayingWorld(byte fieldSizeX, byte fieldSizeY, byte orcasPercentFilling, byte penguinsPercentFilling, byte environs) {
         this.fieldSizeX = fieldSizeX;
         this.fieldSizeY = fieldSizeY;
         orcasQuantity = fieldSizeX * fieldSizeY * orcasPercentFilling / 100;
         penguinsQuantity = fieldSizeX * fieldSizeY * penguinsPercentFilling / 100;
+        this.environs = environs;
         waterSpace = new int[fieldSizeY][fieldSizeX];
         seaCreaturesMap = new HashMap<Integer, SeaCreature>();
         reset();
@@ -40,7 +43,7 @@ public class PlayingWorld {
                 possiblePosX = possiblePos % fieldSizeX;
                 if (waterSpace[possiblePosY][possiblePosX] == -1 ) {
                     waterSpace[possiblePosY][possiblePosX] = seaCreatureIdcounter;
-                    seaCreaturesMap.put(seaCreatureIdcounter, new Orca(seaCreatureIdcounter, possiblePosX, possiblePosY));
+                    seaCreaturesMap.put(seaCreatureIdcounter, new Orca(seaCreatureIdcounter, possiblePosX, possiblePosY, environs));
                     seaCreatureIdcounter++;
                     System.out.printf("В позицию [%d,%d] ДОБАВЛЕНА касатка с id=%d\n", possiblePosX, possiblePosY, waterSpace[possiblePosY][possiblePosX]);
                     break;

@@ -5,6 +5,7 @@ public abstract class SeaCreature {
     protected SealCreatureSpecies species;
     protected int posX;
     protected int posY;
+    protected int environs;
 
     public int getId() {
         return id;
@@ -34,10 +35,11 @@ public abstract class SeaCreature {
         return posY;
     }
 
-    public SeaCreature(int id, int posX, int posY) {
+    public SeaCreature(int id, int posX, int posY, int environs) {
         this.id = id;
         this.posX = posX;
         this.posY = posY;
+        this.environs = environs;
     }
 
     public void setPosY(int posY) {

@@ -11,6 +11,7 @@ public class Main {
     public static final byte FIELD_SIZE_Y = 15;
     public static final byte ORCAS_PERCENT_FILLING = 5;
     public static final byte PENGUINS_PERCENT_FILLING = 20;
+    public static final byte ENVIRONS = 1;
 
     public static void displayWorld(PlayingWorld world) {
         int[][] waterSpace = world.getWaterSpace();
@@ -28,7 +29,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-	    PlayingWorld world = new PlayingWorld(FIELD_SIZE_X, FIELD_SIZE_Y, ORCAS_PERCENT_FILLING, PENGUINS_PERCENT_FILLING);
+	    PlayingWorld world = new PlayingWorld(FIELD_SIZE_X, FIELD_SIZE_Y, ORCAS_PERCENT_FILLING, PENGUINS_PERCENT_FILLING, ENVIRONS);
         try {
             int c=0;
             do {
