@@ -2,6 +2,7 @@ package kszorin.view;
 
 import kszorin.model.*;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class Main {
@@ -11,9 +12,7 @@ public class Main {
     public static final byte ORCAS_PERCENT_FILLING = 5;
     public static final byte PENGUINS_PERCENT_FILLING = 20;
 
-    public static void main(String[] args) {
-	    PlayingWorld world = new PlayingWorld(FIELD_SIZE_X, FIELD_SIZE_Y, ORCAS_PERCENT_FILLING, PENGUINS_PERCENT_FILLING);
-
+    public static void displayWorld(PlayingWorld world) {
         int[][] waterSpace = world.getWaterSpace();
         Map<Integer, SeaCreature> seaCreaturesMap = world.getSeaCreaturesMap();
 
@@ -26,5 +25,22 @@ public class Main {
             }
             System.out.println();
         }
+    }
+
+    public static void main(String[] args) {
+	    PlayingWorld world = new PlayingWorld(FIELD_SIZE_X, FIELD_SIZE_Y, ORCAS_PERCENT_FILLING, PENGUINS_PERCENT_FILLING);
+        try {
+            int c=0;
+            do {
+                if (c==32)
+                displayWorld(world);
+
+                c = System.in.read();
+            }while (c != 'q');
+
+        }catch (IOException ex){
+            ex.printStackTrace();;
+        }
+
     }
 }

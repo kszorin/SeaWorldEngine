@@ -54,6 +54,8 @@ public abstract class SeaCreature {
                 '}';
     }
 
+    public abstract void lifeStep (PlayingWorld playingWorld);
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

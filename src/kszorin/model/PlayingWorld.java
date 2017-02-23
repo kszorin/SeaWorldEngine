@@ -69,6 +69,16 @@ public class PlayingWorld {
         }
     }
 
+    public void nextLifeStep() {
+        for (int i = 0, j = 0; i < fieldSizeY; i++)
+            for (j=0; j < fieldSizeX; j++) {
+                if (waterSpace[i][j] != -1) {
+                    seaCreaturesMap.get(waterSpace[i][j]).lifeStep(this);
+                }
+            }
+
+    }
+
     public Map<Integer, SeaCreature> getSeaCreaturesMap() {
         return seaCreaturesMap;
     }

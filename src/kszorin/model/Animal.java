@@ -21,4 +21,9 @@ public abstract class Animal extends SeaCreature {
         this.timeFromEating = 0;
         this.timeFromReproduction = 0;
     }
+
+    @Override
+    public void lifeStep(PlayingWorld playingWorld) {
+
+    }
 }
