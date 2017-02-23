@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class Main {
 
-    public static final byte FIELD_SIZE_X = 10;
-    public static final byte FIELD_SIZE_Y = 15;
+    public static final byte FIELD_SIZE_X = 5;
+    public static final byte FIELD_SIZE_Y = 5;
     public static final byte ORCAS_PERCENT_FILLING = 5;
     public static final byte PENGUINS_PERCENT_FILLING = 20;
     public static final byte ENVIRONS = 1;
@@ -29,13 +29,15 @@ public class Main {
     }
 
     public static void main(String[] args) {
-	    PlayingWorld world = new PlayingWorld(FIELD_SIZE_X, FIELD_SIZE_Y, ORCAS_PERCENT_FILLING, PENGUINS_PERCENT_FILLING, ENVIRONS);
+	    PlayingWorld playingWorld = new PlayingWorld(FIELD_SIZE_X, FIELD_SIZE_Y, ORCAS_PERCENT_FILLING, PENGUINS_PERCENT_FILLING, ENVIRONS);
+        displayWorld(playingWorld);
         try {
             int c=0;
             do {
-                if (c==32)
-                displayWorld(world);
-
+                if (c==32) {
+                    playingWorld.nextLifeStep();
+                    displayWorld(playingWorld);
+                }
                 c = System.in.read();
             }while (c != 'q');
 

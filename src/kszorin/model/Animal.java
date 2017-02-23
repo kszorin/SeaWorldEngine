@@ -11,8 +11,8 @@ public abstract class Animal extends SeaCreature {
     protected ReproductionBehaviour reproductionBehaviour;
     protected MovingBehaviour movingBehaviour;
 
-    public Animal(int id, int posX, int posY, int environs) {
-        super(id, posX, posY, environs);
+    public Animal(int id, Position pos, byte environs) {
+        super(id, pos, environs);
         this.age = 0;
         this.timeFromEating = 0;
         this.timeFromReproduction = 0;
@@ -22,6 +22,6 @@ public abstract class Animal extends SeaCreature {
     public void lifeStep(PlayingWorld playingWorld) {
 //        eatingBehaviour.eat(playingWorld);
 //        reproductionBehaviour.reproduct(playingWorld);
-        movingBehaviour.move(playingWorld);
+        movingBehaviour.move(this, playingWorld);
     }
 }

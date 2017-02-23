@@ -3,9 +3,8 @@ package kszorin.model;
 public abstract class SeaCreature {
     protected int id;
     protected SealCreatureSpecies species;
-    protected int posX;
-    protected int posY;
-    protected int environs;
+    protected Position pos;
+    protected byte environs;
 
     public int getId() {
         return id;
@@ -23,27 +22,23 @@ public abstract class SeaCreature {
         this.species = species;
     }
 
-    public int getPosX() {
-        return posX;
+    public Position getPos() {
+        return pos;
     }
 
-    public void setPosX(int posX) {
-        this.posX = posX;
+    public void setPos(Position pos) {
+        this.pos = pos;
     }
 
-    public int getPosY() {
-        return posY;
+
+    public byte getEnvirons() {
+        return environs;
     }
 
-    public SeaCreature(int id, int posX, int posY, int environs) {
+    public SeaCreature(int id, Position pos, byte environs) {
         this.id = id;
-        this.posX = posX;
-        this.posY = posY;
+        this.pos = pos;
         this.environs = environs;
-    }
-
-    public void setPosY(int posY) {
-        this.posY = posY;
     }
 
     @Override
@@ -51,8 +46,8 @@ public abstract class SeaCreature {
         return "SeaCreature{" +
                 "id=" + id +
                 ", species=" + species +
-                ", posX=" + posX +
-                ", posY=" + posY +
+                ", pos[X,Y]=[" + pos.getX() +
+                "," + pos.getY() + "]" +
                 '}';
     }
 

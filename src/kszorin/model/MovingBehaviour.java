@@ -1,5 +1,5 @@
 package kszorin.model;
 
 public interface MovingBehaviour {
-    PlayingWorld move (PlayingWorld playingWorld);
+    void move (Animal animal, PlayingWorld playingWorld);
 }

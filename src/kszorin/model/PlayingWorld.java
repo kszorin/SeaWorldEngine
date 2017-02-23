@@ -1,7 +1,6 @@
 package kszorin.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class PlayingWorld {
     private final byte fieldSizeX;
@@ -43,9 +42,9 @@ public class PlayingWorld {
                 possiblePosX = possiblePos % fieldSizeX;
                 if (waterSpace[possiblePosY][possiblePosX] == -1 ) {
                     waterSpace[possiblePosY][possiblePosX] = seaCreatureIdcounter;
-                    seaCreaturesMap.put(seaCreatureIdcounter, new Orca(seaCreatureIdcounter, possiblePosX, possiblePosY, environs));
+                    seaCreaturesMap.put(seaCreatureIdcounter, new Orca(seaCreatureIdcounter, new Position(possiblePosX, possiblePosY), environs));
                     seaCreatureIdcounter++;
-                    System.out.printf("В позицию [%d,%d] ДОБАВЛЕНА касатка с id=%d\n", possiblePosX, possiblePosY, waterSpace[possiblePosY][possiblePosX]);
+                    System.out.printf("В позицию [%d,%d] ДОБАВЛЕНА orca с id=%d\n", possiblePosX, possiblePosY, waterSpace[possiblePosY][possiblePosX]);
                     break;
                 }
                 else
@@ -61,9 +60,9 @@ public class PlayingWorld {
                 possiblePosX = possiblePos % fieldSizeX;
                 if (waterSpace[possiblePosY][possiblePosX] == -1 ) {
                     waterSpace[possiblePosY][possiblePosX] = seaCreatureIdcounter;
-                    seaCreaturesMap.put(seaCreatureIdcounter, new Penguin(seaCreatureIdcounter, possiblePosX, possiblePosY));
+                    seaCreaturesMap.put(seaCreatureIdcounter, new Penguin(seaCreatureIdcounter, new Position(possiblePosX, possiblePosY), environs));
                     seaCreatureIdcounter++;
-                    System.out.printf("В позицию [%d,%d] ДОБАВЛЕН пингвин с id=%d\n", possiblePosX, possiblePosY, waterSpace[possiblePosY][possiblePosX]);
+                    System.out.printf("В позицию [%d,%d] ДОБАВЛЕН penguin с id=%d\n", possiblePosX, possiblePosY, waterSpace[possiblePosY][possiblePosX]);
                     break;
                 }
                 else
@@ -73,13 +72,16 @@ public class PlayingWorld {
     }
 
     public void nextLifeStep() {
+        List<SeaCreature> seaCreatures = new ArrayList<SeaCreature>();
+//        Набираем список существ в порядке обхода поля.
         for (int i = 0, j = 0; i < fieldSizeY; i++)
             for (j=0; j < fieldSizeX; j++) {
-                if (waterSpace[i][j] != -1) {
-                    seaCreaturesMap.get(waterSpace[i][j]).lifeStep(this);
-                }
+                if (waterSpace[i][j] != -1)
+                    seaCreatures.add(seaCreaturesMap.get(waterSpace[i][j]));
             }
-
+//        Запускаем очередной жизненный цикл.
+        for (SeaCreature seaCreature: seaCreatures)
+            seaCreature.lifeStep(this);
     }
 
     public Map<Integer, SeaCreature> getSeaCreaturesMap() {
