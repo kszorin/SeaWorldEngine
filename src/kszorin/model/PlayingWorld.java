@@ -80,7 +80,7 @@ public class PlayingWorld {
             }
 //        Запускаем очередной жизненный цикл.
         for (SeaCreature seaCreature: seaCreatures){
-
+            if (seaCreaturesMap.containsValue(seaCreature))
                 seaCreature.lifeStep(this);
         }
 

@@ -8,10 +8,9 @@ import java.util.Map;
 public class Main {
 
     public static final byte FIELD_SIZE_X = 5;
-    public static final byte FIELD_SIZE_Y = 5;
+    public static final byte FIELD_SIZE_Y = 10;
     public static final byte ORCAS_PERCENT_FILLING = 5;
-    public static final byte PENGUINS_PERCENT_FILLING = 5;
-    public static final byte ENVIRONS = 1;
+    public static final byte PENGUINS_PERCENT_FILLING = 20;
 
     public static void displayWorld(PlayingWorld world) {
         int[][] waterSpace = world.getWaterSpace();
