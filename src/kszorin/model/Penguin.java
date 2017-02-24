@@ -9,8 +9,8 @@ public class Penguin extends Animal {
 
     public Penguin(int id, Position pos) {
         super(id, pos);
-        this.species = SealCreatureSpecies.Penguin;
-        this.environs = PENGUIN_ENVIRONS;
+        species = SealCreatureSpecies.Penguin;
+        environs = PENGUIN_ENVIRONS;
         reproductionPeriod = PENGUIN_REPRODUCTION_PERIOD;
         eatingBehaviour = null;
         reproductionBehaviour = new PeriodicReproduction();

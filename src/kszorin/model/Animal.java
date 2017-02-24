@@ -28,7 +28,6 @@ public abstract class Animal extends SeaCreature {
 
     protected List<Position> findInEnvirons (PlayingWorld playingWorld) {
         int waterSpace[][] = playingWorld.getWaterSpace();
-        Map<Integer, SeaCreature> seaCreaturesMap = playingWorld.getSeaCreaturesMap();
         int beginRangeBypassX, endRangeBypassX, beginRangeBypassY, endRangeBypassY;
 
 //        Определяем границу окрестности по X.
@@ -41,19 +40,18 @@ public abstract class Animal extends SeaCreature {
             beginRangeBypassY = 0;
         if ((endRangeBypassY = pos.getY() + environs) > (playingWorld.getFieldSizeY()-1))
             endRangeBypassY = playingWorld.getFieldSizeY()-1;
-
 //        Определение подходящих мест в окрестности и заполнение буфера свободными позициями.
-        List<Position> freePlacePosBuffer = new ArrayList<Position>();
+        List<Position> findPosBuffer = new ArrayList<Position>();
         for (int i = beginRangeBypassY, j; i <= endRangeBypassY; i++)
             for (j = beginRangeBypassX; j <= endRangeBypassX; j++) {
                 if ((i == pos.getY()) && (j == pos.getX()))
                     continue;
                 else {
                     if (waterSpace[i][j] == -1)
-                        freePlacePosBuffer.add(new Position(j,i));
+                        findPosBuffer.add(new Position(j,i));
                 }
             }
-        return freePlacePosBuffer;
+        return findPosBuffer;
     }
 
     protected List<Position> findInEnvirons (PlayingWorld playingWorld, List<SealCreatureSpecies> targets) {
@@ -76,19 +74,17 @@ public abstract class Animal extends SeaCreature {
                 endRangeBypassY = playingWorld.getFieldSizeY() - 1;
 
 //        Определение подходящих мест в окрестности и заполнение буфера свободными позициями.
-            List<Position> freePlacePosBuffer = new ArrayList<Position>();
+            List<Position> findPosBuffer = new ArrayList<Position>();
             for (int i = beginRangeBypassY, j; i <= endRangeBypassY; i++)
                 for (j = beginRangeBypassX; j <= endRangeBypassX; j++) {
                     if ((i == pos.getY()) && (j == pos.getX()))
                         continue;
                     else {
-                        if ((waterSpace[i][j] != -1) &&
-                                (targets.indexOf(seaCreaturesMap.get(waterSpace[i][j]).getSpecies()) != -1))
-                            freePlacePosBuffer.add(new Position(j,i));
+                        if ((waterSpace[i][j] != -1) && (targets.indexOf(seaCreaturesMap.get(waterSpace[i][j]).getSpecies()) != -1))
+                            findPosBuffer.add(new Position(j,i));
                     }
                 }
-            System.out.printf("Количество подходящих жертв - %d \n", freePlacePosBuffer.size());
-            return freePlacePosBuffer;
+            return findPosBuffer;
         }
     }
 

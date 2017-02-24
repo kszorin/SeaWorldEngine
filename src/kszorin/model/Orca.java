@@ -15,9 +15,9 @@ public class Orca extends Animal {
 
     public Orca(int id, Position pos) {
         super(id, pos);
-        this.species = SealCreatureSpecies.Orca;
-        this.reproductionPeriod = ORCA_REPRODUCTION_PERIOD;
-        this.environs = ORCA_ENVIRONS;
+        species = SealCreatureSpecies.Orca;
+        reproductionPeriod = ORCA_REPRODUCTION_PERIOD;
+        environs = ORCA_ENVIRONS;
         eatingBehaviour = new Hunting();
         reproductionBehaviour = new PeriodicReproduction();
         movingBehaviour = new InEnvironsMoving();
@@ -40,7 +40,7 @@ public class Orca extends Animal {
         }
         else {
             age++;
-            if ((age!=0) && (age%ORCA_REPRODUCTION_PERIOD == 0)) {
+            if ((age!=0) && (age % ORCA_REPRODUCTION_PERIOD == 0)) {
                 reproductionBehaviour.reproduct(this, playingWorld, findInEnvirons(playingWorld));
             }
         }

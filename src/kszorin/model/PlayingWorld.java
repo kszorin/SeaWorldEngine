@@ -7,13 +7,13 @@ public class PlayingWorld {
     private final byte fieldSizeY;
     private final int orcasQuantity;
     private final int penguinsQuantity;
-    private int seaCreatureIdCounter;
+    private int seaCreaturesIdCounter;
     private int waterSpace[][];
     private Map<Integer, SeaCreature> seaCreaturesMap;
 
-    //TODO: сделать проверку вводимых значений
-    //TODO: подумать над передачей существ и их количество в массиве
-    public PlayingWorld(byte fieldSizeX, byte fieldSizeY, byte orcasPercentFilling, byte penguinsPercentFilling) {
+    public PlayingWorld(byte fieldSizeX, byte fieldSizeY, byte orcasPercentFilling, byte penguinsPercentFilling) throws Exception {
+        if ((fieldSizeX <= 0) || (fieldSizeY <= 0) || (orcasPercentFilling <=0) || (penguinsPercentFilling <=0))
+            throw new Exception("Incorrect input data!");
         this.fieldSizeX = fieldSizeX;
         this.fieldSizeY = fieldSizeY;
         orcasQuantity = fieldSizeX * fieldSizeY * orcasPercentFilling / 100;
@@ -29,7 +29,7 @@ public class PlayingWorld {
             for (j=0; j < fieldSizeX; j++)
                 waterSpace[i][j] = -1;
 //        Обнуляем счётчик и массив морских созданий.
-        seaCreatureIdCounter = 0;
+        seaCreaturesIdCounter = 0;
         seaCreaturesMap.clear();
 
 //        Создаём и расставляем касаток на поле
@@ -40,9 +40,9 @@ public class PlayingWorld {
                 possiblePosY = possiblePos / fieldSizeX;
                 possiblePosX = possiblePos % fieldSizeX;
                 if (waterSpace[possiblePosY][possiblePosX] == -1 ) {
-                    waterSpace[possiblePosY][possiblePosX] = seaCreatureIdCounter;
-                    seaCreaturesMap.put(seaCreatureIdCounter, new Orca(seaCreatureIdCounter, new Position(possiblePosX, possiblePosY)));
-                    seaCreatureIdCounter++;
+                    waterSpace[possiblePosY][possiblePosX] = seaCreaturesIdCounter;
+                    seaCreaturesMap.put(seaCreaturesIdCounter, new Orca(seaCreaturesIdCounter, new Position(possiblePosX, possiblePosY)));
+                    seaCreaturesIdCounter++;
                     System.out.printf("Orca (id=%d) ДОБАВЛЕНА в [%d,%d]  \n", waterSpace[possiblePosY][possiblePosX], possiblePosX, possiblePosY);
                     break;
                 }
@@ -58,9 +58,9 @@ public class PlayingWorld {
                 possiblePosY = possiblePos / fieldSizeX;
                 possiblePosX = possiblePos % fieldSizeX;
                 if (waterSpace[possiblePosY][possiblePosX] == -1 ) {
-                    waterSpace[possiblePosY][possiblePosX] = seaCreatureIdCounter;
-                    seaCreaturesMap.put(seaCreatureIdCounter, new Penguin(seaCreatureIdCounter, new Position(possiblePosX, possiblePosY)));
-                    seaCreatureIdCounter++;
+                    waterSpace[possiblePosY][possiblePosX] = seaCreaturesIdCounter;
+                    seaCreaturesMap.put(seaCreaturesIdCounter, new Penguin(seaCreaturesIdCounter, new Position(possiblePosX, possiblePosY)));
+                    seaCreaturesIdCounter++;
                     System.out.printf("Penguin (id=%d) ДОБАВЛЕН в [%d,%d]  \n", waterSpace[possiblePosY][possiblePosX], possiblePosX, possiblePosY);
                     break;
                 }
@@ -79,11 +79,10 @@ public class PlayingWorld {
                     seaCreatures.add(seaCreaturesMap.get(waterSpace[i][j]));
             }
 //        Запускаем очередной жизненный цикл.
-        for (SeaCreature seaCreature: seaCreatures){
+        for (SeaCreature seaCreature: seaCreatures) {
             if (seaCreaturesMap.containsValue(seaCreature))
                 seaCreature.lifeStep(this);
         }
-
     }
 
     public Map<Integer, SeaCreature> getSeaCreaturesMap() {
@@ -102,11 +101,11 @@ public class PlayingWorld {
         return fieldSizeY;
     }
 
-    public int getSeaCreatureIdCounter() {
-        return seaCreatureIdCounter;
+    public int getSeaCreaturesIdCounter() {
+        return seaCreaturesIdCounter;
     }
 
-    public void setSeaCreatureIdCounter(int seaCreatureIdCounter) {
-        this.seaCreatureIdCounter = seaCreatureIdCounter;
+    public void setSeaCreaturesIdCounter(int seaCreaturesIdCounter) {
+        this.seaCreaturesIdCounter = seaCreaturesIdCounter;
     }
 }

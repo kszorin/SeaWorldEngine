@@ -20,12 +20,12 @@ public class PeriodicReproduction implements ReproductionBehaviour {
             int bufferRandomNum = (int) (Math.random() * (foundPositionsInEnvirons.size()));
             Position selectedFreePos = foundPositionsInEnvirons.get(bufferRandomNum);
 //        Создаём детёныша на свободном месте.
-            Animal baby = animal.getBaby(playingWorld.getSeaCreatureIdCounter(), selectedFreePos);
-            seaCreaturesMap.put(playingWorld.getSeaCreatureIdCounter(), baby);
-            waterSpace[selectedFreePos.getY()][selectedFreePos.getX()] = playingWorld.getSeaCreatureIdCounter();
-            playingWorld.setSeaCreatureIdCounter(playingWorld.getSeaCreatureIdCounter() + 1);
+            Animal baby = animal.getBaby(playingWorld.getSeaCreaturesIdCounter(), selectedFreePos);
+            seaCreaturesMap.put(playingWorld.getSeaCreaturesIdCounter(), baby);
+            waterSpace[selectedFreePos.getY()][selectedFreePos.getX()] = playingWorld.getSeaCreaturesIdCounter();
+            playingWorld.setSeaCreaturesIdCounter(playingWorld.getSeaCreaturesIdCounter() + 1);
 
-            System.out.printf("%c(id=%d) [%d,%d]: produce %c (id=%d) [%d,%d]\n", animal.getSpecies().toString().charAt(0), animal.getId(),
+            System.out.printf("%c(%d) [%d,%d]: produce %c(%d) [%d,%d]\n", animal.getSpecies().toString().charAt(0), animal.getId(),
                     animal.getPos().getX(), animal.getPos().getY(), baby.getSpecies().toString().charAt(0), baby.getId(),
                     baby.getPos().getX(), baby.getPos().getY());
         }
