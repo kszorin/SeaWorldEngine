@@ -29,10 +29,14 @@ public class Orca extends Animal {
         if (eatingBehaviour.eat(this, playingWorld, findInEnvirons (playingWorld, targetList))) {
             timeFromEating = 0;
         }
-        else
-            movingBehaviour.move(this, playingWorld, findInEnvirons (playingWorld));
+        else {
+            movingBehaviour.move(this, playingWorld, findInEnvirons(playingWorld));
+            timeFromEating++;
+        }
         if (timeFromEating >= ORCA_HUNGER_DEATH_PERIOD) {
-            //гибель
+            playingWorld.getWaterSpace()[pos.getY()][pos.getX()] = -1;
+            playingWorld.getSeaCreaturesMap().remove(this.id);
+            System.out.printf("Orca with id=%d died of hunger!\n", id);
         }
         else {
             age++;
