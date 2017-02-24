@@ -1,4 +1,6 @@
-package kszorin.model;
+package kszorin.model.behaviour;
+
+import kszorin.model.PlayingWorld;
 
 public class PeriodicReproduction implements ReproductionBehaviour {
     @Override

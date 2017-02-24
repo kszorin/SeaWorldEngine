@@ -1,4 +1,7 @@
-package kszorin.model;
+package kszorin.model.behaviour;
+
+import kszorin.model.PlayingWorld;
+import kszorin.model.behaviour.EatingBehaviour;
 
 public class NotEating implements EatingBehaviour {
     @Override

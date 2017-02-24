@@ -1,4 +1,8 @@
-package kszorin.model;
+package kszorin.model.behaviour;
+
+import kszorin.model.Animal;
+import kszorin.model.PlayingWorld;
+import kszorin.model.Position;
 
 import java.util.List;
 

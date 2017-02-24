@@ -1,6 +1,10 @@
 package kszorin.model;
 
 
+import kszorin.model.behaviour.EatingBehaviour;
+import kszorin.model.behaviour.MovingBehaviour;
+import kszorin.model.behaviour.ReproductionBehaviour;
+
 import java.util.*;
 
 public abstract class Animal extends SeaCreature {
@@ -23,7 +27,7 @@ public abstract class Animal extends SeaCreature {
     private List<Position> findInEnvirons (PlayingWorld playingWorld) {
         int waterSpace[][] = playingWorld.getWaterSpace();
         Map<Integer, SeaCreature> seaCreaturesMap = playingWorld.getSeaCreaturesMap();
-        int beginRangeBypassX=0, endRangeBypassX=0, beginRangeBypassY=0, endRangeBypassY=0;
+        int beginRangeBypassX, endRangeBypassX, beginRangeBypassY, endRangeBypassY;
 
 //        Определяем границу окрестности по X.
         if ((beginRangeBypassX = pos.getX() - environs) < 0)
@@ -38,7 +42,7 @@ public abstract class Animal extends SeaCreature {
 
 //        Определение свободных мест в окрестности и заполнение буфера свободными позициями.
         List<Position> freePlacePosBuffer = new ArrayList<Position>();
-        for (int i = beginRangeBypassY, j = beginRangeBypassX; i <= endRangeBypassY; i++)
+        for (int i = beginRangeBypassY, j; i <= endRangeBypassY; i++)
             for (j = beginRangeBypassX; j <= endRangeBypassX; j++) {
                 if ((i == pos.getY()) && (j == pos.getX()))
                     continue;
@@ -53,7 +57,7 @@ public abstract class Animal extends SeaCreature {
     private List<Position> findInEnvirons (PlayingWorld playingWorld, List<SealCreatureSpecies> targets) {
         int waterSpace[][] = playingWorld.getWaterSpace();
         Map<Integer, SeaCreature> seaCreaturesMap = playingWorld.getSeaCreaturesMap();
-        int beginRangeBypassX=0, endRangeBypassX=0, beginRangeBypassY=0, endRangeBypassY=0;
+        int beginRangeBypassX, endRangeBypassX, beginRangeBypassY, endRangeBypassY;
 
         if (targets.size() == 0)
             return Collections.emptyList();
@@ -71,7 +75,7 @@ public abstract class Animal extends SeaCreature {
 
 //        Определение свободных мест в окрестности и заполнение буфера свободными позициями.
             List<Position> freePlacePosBuffer = new ArrayList<Position>();
-            for (int i = beginRangeBypassY, j = beginRangeBypassX; i <= endRangeBypassY; i++)
+            for (int i = beginRangeBypassY, j; i <= endRangeBypassY; i++)
                 for (j = beginRangeBypassX; j <= endRangeBypassX; j++) {
                     if ((i == pos.getY()) && (j == pos.getX()))
                         continue;

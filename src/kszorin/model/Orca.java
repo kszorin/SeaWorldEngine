@@ -1,5 +1,9 @@
 package kszorin.model;
 
+import kszorin.model.behaviour.Hunting;
+import kszorin.model.behaviour.InEnvironsMoving;
+import kszorin.model.behaviour.PeriodicReproduction;
+
 public class Orca extends Animal {
     public static final byte ORCA_REPRODUCTION_PERIOD = 8;
     public static final byte ORCA_ENVIRONS = 1;

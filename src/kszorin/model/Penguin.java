@@ -1,5 +1,9 @@
 package kszorin.model;
 
+import kszorin.model.behaviour.InEnvironsMoving;
+import kszorin.model.behaviour.NotEating;
+import kszorin.model.behaviour.PeriodicReproduction;
+
 public class Penguin extends Animal {
     public static final int PENGUIN_REPRODUCTION_PERIOD = 3;
     public static final byte PENGUIN_ENVIRONS = 1;
