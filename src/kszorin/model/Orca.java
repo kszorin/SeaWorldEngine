@@ -1,13 +1,15 @@
 package kszorin.model;
 
 public class Orca extends Animal {
-    public static final int REPRODUCTION_PERIOD_ORCA = 8;
-    public static final int HUNGER_DEATH_PERIOD_ORCA = 3;
+    public static final byte ORCA_REPRODUCTION_PERIOD = 8;
+    public static final byte ORCA_ENVIRONS = 1;
+    public static final byte ORCA_HUNGER_DEATH_PERIOD = 3;
 
-    public Orca(int id, Position pos, byte environs) {
-        super(id, pos, environs);
+    public Orca(int id, Position pos) {
+        super(id, pos);
         this.species = SealCreatureSpecies.Orca;
-        reproductionPeriod = REPRODUCTION_PERIOD_ORCA;
+        this.reproductionPeriod = ORCA_REPRODUCTION_PERIOD;
+        this.environs = ORCA_ENVIRONS;
         eatingBehaviour = new Hunting();
         reproductionBehaviour = new PeriodicReproduction();
         movingBehaviour = new InEnvironsMoving();

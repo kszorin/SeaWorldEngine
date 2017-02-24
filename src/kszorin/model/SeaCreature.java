@@ -10,16 +10,8 @@ public abstract class SeaCreature {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public SealCreatureSpecies getSpecies() {
         return species;
-    }
-
-    public void setSpecies(SealCreatureSpecies species) {
-        this.species = species;
     }
 
     public Position getPos() {
@@ -30,16 +22,12 @@ public abstract class SeaCreature {
         this.pos = pos;
     }
 
-
-    public byte getEnvirons() {
-        return environs;
-    }
-
-    public SeaCreature(int id, Position pos, byte environs) {
+    public SeaCreature(int id, Position pos) {
         this.id = id;
         this.pos = pos;
-        this.environs = environs;
     }
+
+    public abstract void lifeStep (PlayingWorld playingWorld);
 
     @Override
     public String toString() {
@@ -51,7 +39,6 @@ public abstract class SeaCreature {
                 '}';
     }
 
-    public abstract void lifeStep (PlayingWorld playingWorld);
 
     @Override
     public boolean equals(Object o) {

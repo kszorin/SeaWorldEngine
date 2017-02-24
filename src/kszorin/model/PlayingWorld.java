@@ -4,20 +4,19 @@ import java.util.*;
 
 public class PlayingWorld {
     private final byte fieldSizeX;
-    private byte fieldSizeY;
+    private final byte fieldSizeY;
     private final int orcasQuantity;
     private final int penguinsQuantity;
-    private byte environs;
     private int waterSpace[][];
     private Map<Integer, SeaCreature> seaCreaturesMap;
 
-    //TODO: сделать порверку вводимых значений
-    public PlayingWorld(byte fieldSizeX, byte fieldSizeY, byte orcasPercentFilling, byte penguinsPercentFilling, byte environs) {
+    //TODO: сделать проверку вводимых значений
+    //TODO: подумать над передачей существ и их количество в массиве
+    public PlayingWorld(byte fieldSizeX, byte fieldSizeY, byte orcasPercentFilling, byte penguinsPercentFilling) {
         this.fieldSizeX = fieldSizeX;
         this.fieldSizeY = fieldSizeY;
         orcasQuantity = fieldSizeX * fieldSizeY * orcasPercentFilling / 100;
         penguinsQuantity = fieldSizeX * fieldSizeY * penguinsPercentFilling / 100;
-        this.environs = environs;
         waterSpace = new int[fieldSizeY][fieldSizeX];
         seaCreaturesMap = new HashMap<Integer, SeaCreature>();
         reset();
@@ -34,16 +33,16 @@ public class PlayingWorld {
         System.out.println("Размер хранилища существ:" + seaCreaturesMap.size());
 
 //        Создаём и расставляем касаток на поле
-        int possiblePos=0, possiblePosX=0, possiblePosY=0, seaCreatureIdcounter = 0;;
+        int possiblePos=0, possiblePosX=0, possiblePosY=0, seaCreatureIdCounter = 0;;
         for (int i=0; i < orcasQuantity; i++) {
             do {
                 possiblePos = (int) (Math.random() * (fieldSizeY * fieldSizeX));
                 possiblePosY = possiblePos / fieldSizeX;
                 possiblePosX = possiblePos % fieldSizeX;
                 if (waterSpace[possiblePosY][possiblePosX] == -1 ) {
-                    waterSpace[possiblePosY][possiblePosX] = seaCreatureIdcounter;
-                    seaCreaturesMap.put(seaCreatureIdcounter, new Orca(seaCreatureIdcounter, new Position(possiblePosX, possiblePosY), environs));
-                    seaCreatureIdcounter++;
+                    waterSpace[possiblePosY][possiblePosX] = seaCreatureIdCounter;
+                    seaCreaturesMap.put(seaCreatureIdCounter, new Orca(seaCreatureIdCounter, new Position(possiblePosX, possiblePosY)));
+                    seaCreatureIdCounter++;
                     System.out.printf("В позицию [%d,%d] ДОБАВЛЕНА orca с id=%d\n", possiblePosX, possiblePosY, waterSpace[possiblePosY][possiblePosX]);
                     break;
                 }
@@ -59,9 +58,9 @@ public class PlayingWorld {
                 possiblePosY = possiblePos / fieldSizeX;
                 possiblePosX = possiblePos % fieldSizeX;
                 if (waterSpace[possiblePosY][possiblePosX] == -1 ) {
-                    waterSpace[possiblePosY][possiblePosX] = seaCreatureIdcounter;
-                    seaCreaturesMap.put(seaCreatureIdcounter, new Penguin(seaCreatureIdcounter, new Position(possiblePosX, possiblePosY), environs));
-                    seaCreatureIdcounter++;
+                    waterSpace[possiblePosY][possiblePosX] = seaCreatureIdCounter;
+                    seaCreaturesMap.put(seaCreatureIdCounter, new Penguin(seaCreatureIdCounter, new Position(possiblePosX, possiblePosY)));
+                    seaCreatureIdCounter++;
                     System.out.printf("В позицию [%d,%d] ДОБАВЛЕН penguin с id=%d\n", possiblePosX, possiblePosY, waterSpace[possiblePosY][possiblePosX]);
                     break;
                 }

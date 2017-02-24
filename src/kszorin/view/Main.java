@@ -29,7 +29,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-	    PlayingWorld playingWorld = new PlayingWorld(FIELD_SIZE_X, FIELD_SIZE_Y, ORCAS_PERCENT_FILLING, PENGUINS_PERCENT_FILLING, ENVIRONS);
+	    PlayingWorld playingWorld = new PlayingWorld(FIELD_SIZE_X, FIELD_SIZE_Y, ORCAS_PERCENT_FILLING, PENGUINS_PERCENT_FILLING);
         displayWorld(playingWorld);
         try {
             int c=0;

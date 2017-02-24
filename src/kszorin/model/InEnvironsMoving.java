@@ -6,15 +6,15 @@ import java.util.Map;
 
 public class InEnvironsMoving implements MovingBehaviour {
     @Override
-    public void move(Animal animal, PlayingWorld playingWorld, List<Position> findInEnvirons) {
+    public void move(Animal animal, PlayingWorld playingWorld, List<Position> foundPositionsInEnvirons) {
         int waterSpace[][] = playingWorld.getWaterSpace();
         Map<Integer, SeaCreature> seaCreaturesMap = playingWorld.getSeaCreaturesMap();
         Position pos = animal.getPos();
 
-        if (findInEnvirons.size() > 0) {
+        if (foundPositionsInEnvirons.size() > 0) {
 //        Случайным образом выбираем позицию из буфера свободных мест.
-            int bufferRandomNum = (int) (Math.random() * (findInEnvirons.size()));
-            Position selectedFreePos = findInEnvirons.get(bufferRandomNum);
+            int bufferRandomNum = (int) (Math.random() * (foundPositionsInEnvirons.size()));
+            Position selectedFreePos = foundPositionsInEnvirons.get(bufferRandomNum);
 //        Перемещаем животину в новую позицию.
             waterSpace[selectedFreePos.getY()][selectedFreePos.getX()] = waterSpace[pos.getY()][pos.getX()];
             waterSpace[pos.getY()][pos.getX()] = -1;

@@ -4,17 +4,17 @@ package kszorin.model;
 import java.util.*;
 
 public abstract class Animal extends SeaCreature {
-    protected int age;
-    protected int reproductionPeriod;
-    protected int timeFromEating=0;
-    protected int timeFromReproduction=0;
+    protected byte age;
+    protected byte reproductionPeriod;
+    protected byte timeFromEating=0;
+    protected byte timeFromReproduction=0;
 
     protected EatingBehaviour eatingBehaviour;
     protected ReproductionBehaviour reproductionBehaviour;
     protected MovingBehaviour movingBehaviour;
 
-    public Animal(int id, Position pos, byte environs) {
-        super(id, pos, environs);
+    public Animal(int id, Position pos) {
+        super(id, pos);
         this.age = 0;
         this.timeFromEating = 0;
         this.timeFromReproduction = 0;
