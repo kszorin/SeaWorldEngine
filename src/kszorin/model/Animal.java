@@ -24,7 +24,7 @@ public abstract class Animal extends SeaCreature {
         this.timeFromReproduction = 0;
     }
 
-    private List<Position> findInEnvirons (PlayingWorld playingWorld) {
+    protected List<Position> findInEnvirons (PlayingWorld playingWorld) {
         int waterSpace[][] = playingWorld.getWaterSpace();
         Map<Integer, SeaCreature> seaCreaturesMap = playingWorld.getSeaCreaturesMap();
         int beginRangeBypassX, endRangeBypassX, beginRangeBypassY, endRangeBypassY;
@@ -40,7 +40,7 @@ public abstract class Animal extends SeaCreature {
         if ((endRangeBypassY = pos.getY() + environs) > (playingWorld.getFieldSizeY()-1))
             endRangeBypassY = playingWorld.getFieldSizeY()-1;
 
-//        Определение свободных мест в окрестности и заполнение буфера свободными позициями.
+//        Определение подходящих мест в окрестности и заполнение буфера свободными позициями.
         List<Position> freePlacePosBuffer = new ArrayList<Position>();
         for (int i = beginRangeBypassY, j; i <= endRangeBypassY; i++)
             for (j = beginRangeBypassX; j <= endRangeBypassX; j++) {
@@ -54,7 +54,7 @@ public abstract class Animal extends SeaCreature {
         return freePlacePosBuffer;
     }
 
-    private List<Position> findInEnvirons (PlayingWorld playingWorld, List<SealCreatureSpecies> targets) {
+    protected List<Position> findInEnvirons (PlayingWorld playingWorld, List<SealCreatureSpecies> targets) {
         int waterSpace[][] = playingWorld.getWaterSpace();
         Map<Integer, SeaCreature> seaCreaturesMap = playingWorld.getSeaCreaturesMap();
         int beginRangeBypassX, endRangeBypassX, beginRangeBypassY, endRangeBypassY;
@@ -73,29 +73,23 @@ public abstract class Animal extends SeaCreature {
             if ((endRangeBypassY = pos.getY() + environs) > (playingWorld.getFieldSizeY() - 1))
                 endRangeBypassY = playingWorld.getFieldSizeY() - 1;
 
-//        Определение свободных мест в окрестности и заполнение буфера свободными позициями.
+//        Определение подходящих мест в окрестности и заполнение буфера свободными позициями.
             List<Position> freePlacePosBuffer = new ArrayList<Position>();
             for (int i = beginRangeBypassY, j; i <= endRangeBypassY; i++)
                 for (j = beginRangeBypassX; j <= endRangeBypassX; j++) {
                     if ((i == pos.getY()) && (j == pos.getX()))
                         continue;
                     else {
-                        if (targets.indexOf(seaCreaturesMap.get(waterSpace[i][j]).getSpecies()) != 0)
+                        if ((waterSpace[i][j] != -1) &&
+                                (targets.indexOf(seaCreaturesMap.get(waterSpace[i][j]).getSpecies()) != -1))
                             freePlacePosBuffer.add(new Position(j,i));
                     }
                 }
-            System.out.printf("Количество свободных клеток - %d ", freePlacePosBuffer.size());
+            System.out.printf("Количество подходящих жертв - %d \n", freePlacePosBuffer.size());
             return freePlacePosBuffer;
         }
     }
 
-
     @Override
-    public void lifeStep(PlayingWorld playingWorld) {
-//        eatingBehaviour.eat(playingWorld);
-
-        movingBehaviour.move(this, playingWorld, findInEnvirons (playingWorld));
-//        reproductionBehaviour.reproduct(playingWorld);
-
-    }
+    public abstract void lifeStep(PlayingWorld playingWorld);
 }

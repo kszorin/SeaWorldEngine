@@ -79,8 +79,11 @@ public class PlayingWorld {
                     seaCreatures.add(seaCreaturesMap.get(waterSpace[i][j]));
             }
 //        Запускаем очередной жизненный цикл.
-        for (SeaCreature seaCreature: seaCreatures)
-            seaCreature.lifeStep(this);
+        for (SeaCreature seaCreature: seaCreatures){
+
+                seaCreature.lifeStep(this);
+        }
+
     }
 
     public Map<Integer, SeaCreature> getSeaCreaturesMap() {
