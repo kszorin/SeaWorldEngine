@@ -36,14 +36,18 @@ public class Orca extends Animal {
         if (timeFromEating >= ORCA_HUNGER_DEATH_PERIOD) {
             playingWorld.getWaterSpace()[pos.getY()][pos.getX()] = -1;
             playingWorld.getSeaCreaturesMap().remove(this.id);
-            System.out.printf("Orca with id=%d died of hunger!\n", id);
+            System.out.printf("%c(%d) [%d,%d]: died of hungry!\n", species.toString().charAt(0), id, pos.getX(), pos.getY());
         }
         else {
             age++;
             if ((age!=0) && (age%ORCA_REPRODUCTION_PERIOD == 0)) {
-//              TODO: размножение
-//              reproductionBehaviour.reproduct(playingWorld);
+                reproductionBehaviour.reproduct(this, playingWorld, findInEnvirons(playingWorld));
             }
         }
+    }
+
+    @Override
+    public Animal getBaby(int id, Position pos) {
+        return new Orca(id, pos);
     }
 }

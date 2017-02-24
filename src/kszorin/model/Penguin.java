@@ -22,8 +22,12 @@ public class Penguin extends Animal {
         movingBehaviour.move(this, playingWorld, findInEnvirons (playingWorld));
         age++;
         if ((age!=0) && (age % PENGUIN_REPRODUCTION_PERIOD == 0)) {
-//          TODO: размножение
-//          reproductionBehaviour.reproduct(playingWorld);
+            reproductionBehaviour.reproduct(this, playingWorld, findInEnvirons(playingWorld));
         }
+    }
+
+    @Override
+    public Animal getBaby(int id, Position pos) {
+        return new Penguin(id, pos);
     }
 }

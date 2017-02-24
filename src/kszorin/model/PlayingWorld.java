@@ -7,6 +7,7 @@ public class PlayingWorld {
     private final byte fieldSizeY;
     private final int orcasQuantity;
     private final int penguinsQuantity;
+    private int seaCreatureIdCounter;
     private int waterSpace[][];
     private Map<Integer, SeaCreature> seaCreaturesMap;
 
@@ -24,16 +25,15 @@ public class PlayingWorld {
 
     public void reset () {
 //        Создаём чистое водное пространство.
-        for (int i = 0, j = 0; i < fieldSizeY; i++)
+        for (int i = 0, j; i < fieldSizeY; i++)
             for (j=0; j < fieldSizeX; j++)
                 waterSpace[i][j] = -1;
 //        Обнуляем счётчик и массив морских созданий.
+        seaCreatureIdCounter = 0;
         seaCreaturesMap.clear();
 
-        System.out.println("Размер хранилища существ:" + seaCreaturesMap.size());
-
 //        Создаём и расставляем касаток на поле
-        int possiblePos=0, possiblePosX=0, possiblePosY=0, seaCreatureIdCounter = 0;;
+        int possiblePos, possiblePosX, possiblePosY;
         for (int i=0; i < orcasQuantity; i++) {
             do {
                 possiblePos = (int) (Math.random() * (fieldSizeY * fieldSizeX));
@@ -43,7 +43,7 @@ public class PlayingWorld {
                     waterSpace[possiblePosY][possiblePosX] = seaCreatureIdCounter;
                     seaCreaturesMap.put(seaCreatureIdCounter, new Orca(seaCreatureIdCounter, new Position(possiblePosX, possiblePosY)));
                     seaCreatureIdCounter++;
-                    System.out.printf("В позицию [%d,%d] ДОБАВЛЕНА orca с id=%d\n", possiblePosX, possiblePosY, waterSpace[possiblePosY][possiblePosX]);
+                    System.out.printf("Orca (id=%d) ДОБАВЛЕНА в [%d,%d]  \n", waterSpace[possiblePosY][possiblePosX], possiblePosX, possiblePosY);
                     break;
                 }
                 else
@@ -61,7 +61,7 @@ public class PlayingWorld {
                     waterSpace[possiblePosY][possiblePosX] = seaCreatureIdCounter;
                     seaCreaturesMap.put(seaCreatureIdCounter, new Penguin(seaCreatureIdCounter, new Position(possiblePosX, possiblePosY)));
                     seaCreatureIdCounter++;
-                    System.out.printf("В позицию [%d,%d] ДОБАВЛЕН penguin с id=%d\n", possiblePosX, possiblePosY, waterSpace[possiblePosY][possiblePosX]);
+                    System.out.printf("Penguin (id=%d) ДОБАВЛЕН в [%d,%d]  \n", waterSpace[possiblePosY][possiblePosX], possiblePosX, possiblePosY);
                     break;
                 }
                 else
@@ -73,7 +73,7 @@ public class PlayingWorld {
     public void nextLifeStep() {
         List<SeaCreature> seaCreatures = new ArrayList<SeaCreature>();
 //        Набираем список существ в порядке обхода поля.
-        for (int i = 0, j = 0; i < fieldSizeY; i++)
+        for (int i = 0, j; i < fieldSizeY; i++)
             for (j=0; j < fieldSizeX; j++) {
                 if (waterSpace[i][j] != -1)
                     seaCreatures.add(seaCreaturesMap.get(waterSpace[i][j]));
@@ -100,5 +100,13 @@ public class PlayingWorld {
 
     public byte getFieldSizeY() {
         return fieldSizeY;
+    }
+
+    public int getSeaCreatureIdCounter() {
+        return seaCreatureIdCounter;
+    }
+
+    public void setSeaCreatureIdCounter(int seaCreatureIdCounter) {
+        this.seaCreatureIdCounter = seaCreatureIdCounter;
     }
 }

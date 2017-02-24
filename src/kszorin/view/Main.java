@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class Main {
 
-    public static final byte FIELD_SIZE_X = 5;
-    public static final byte FIELD_SIZE_Y = 10;
+    public static final byte FIELD_SIZE_X = 4;
+    public static final byte FIELD_SIZE_Y = 5;
     public static final byte ORCAS_PERCENT_FILLING = 5;
     public static final byte PENGUINS_PERCENT_FILLING = 20;
 
@@ -16,15 +16,17 @@ public class Main {
         int[][] waterSpace = world.getWaterSpace();
         Map<Integer, SeaCreature> seaCreaturesMap = world.getSeaCreaturesMap();
 
-        for (int i=0, j=0; i < world.getFieldSizeY(); i++) {
+        System.out.println();
+        for (int i=0, j; i < world.getFieldSizeY(); i++) {
             for (j = 0; j < world.getFieldSizeX(); j++) {
                 if (waterSpace[i][j] == -1)
-                    System.out.print(" . ");
+                    System.out.print("  .  ");
                 else
-                    System.out.printf(" %c ", seaCreaturesMap.get(waterSpace[i][j]).getSpecies().toString().charAt(0));
+                    System.out.printf(" %c%2d ", seaCreaturesMap.get(waterSpace[i][j]).getSpecies().toString().charAt(0), waterSpace[i][j]);
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     public static void main(String[] args) {
@@ -41,7 +43,7 @@ public class Main {
             }while (c != 'q');
 
         }catch (IOException ex){
-            ex.printStackTrace();;
+            ex.printStackTrace();
         }
 
     }

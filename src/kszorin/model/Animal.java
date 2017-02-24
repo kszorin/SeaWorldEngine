@@ -24,6 +24,8 @@ public abstract class Animal extends SeaCreature {
         this.timeFromReproduction = 0;
     }
 
+    public abstract Animal getBaby(int id, Position pos);
+
     protected List<Position> findInEnvirons (PlayingWorld playingWorld) {
         int waterSpace[][] = playingWorld.getWaterSpace();
         Map<Integer, SeaCreature> seaCreaturesMap = playingWorld.getSeaCreaturesMap();

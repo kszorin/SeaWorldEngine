@@ -20,7 +20,7 @@ public class InEnvironsMoving implements MovingBehaviour {
             waterSpace[selectedFreePos.getY()][selectedFreePos.getX()] = waterSpace[pos.getY()][pos.getX()];
             waterSpace[pos.getY()][pos.getX()] = -1;
             seaCreaturesMap.get(animal.getId()).setPos(selectedFreePos);
-            System.out.printf("%c (id=%d): [%d,%d] -> [%d,%d]\n", animal.getSpecies().toString().charAt(0), animal.getId(), pos.getX(), pos.getY(),
+            System.out.printf("%c(%d) [%d,%d]: -> [%d,%d]\n", animal.getSpecies().toString().charAt(0), animal.getId(), pos.getX(), pos.getY(),
                     animal.getPos().getX(), animal.getPos().getY());
         }
     }
