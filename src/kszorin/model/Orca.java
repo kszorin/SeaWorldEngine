@@ -11,7 +11,7 @@ public class Orca extends Animal {
     private static final byte ORCA_REPRODUCTION_PERIOD = 8;
     private static final byte ORCA_ENVIRONS = 1;
     private static final byte ORCA_HUNGER_DEATH_PERIOD = 3;
-    private List<SealCreatureSpecies> targetList = new ArrayList<SealCreatureSpecies>();
+
 
     public Orca(int id, Position pos) {
         super(id, pos);

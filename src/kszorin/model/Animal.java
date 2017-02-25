@@ -17,6 +17,8 @@ public abstract class Animal extends SeaCreature {
     protected ReproductionBehaviour reproductionBehaviour;
     protected MovingBehaviour movingBehaviour;
 
+    protected List<SealCreatureSpecies> targetList = new ArrayList<SealCreatureSpecies>();
+
     public Animal(int id, Position pos) {
         super(id, pos);
         this.age = 0;
